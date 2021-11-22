@@ -1,25 +1,59 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+
+import Layout from '@/layout'
+
+import one from './views/one'
+import two from './views/two'
+import three from './views/three'
+import four from './views/four'
+import five from './views/five'
+import oneone from './views/oneone'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      name: 'doashBoard',
+      component: Layout,
+      children: [
+        {
+          path: 'one',
+          component: one,
+          name: 'one',
+          children: [
+            {
+              path: 'oneone',
+              component: oneone,
+              name: 'oneone'
+            }
+          ]
+        },
+        {
+          path: 'two',
+          component: two,
+          name: 'two'
+        },
+        {
+          path: 'three',
+          component: three,
+          name: 'three'
+        },
+        {
+          path: 'four',
+          component: four,
+          name: 'four'
+        },
+        {
+          path: 'five',
+          component: five,
+          name: 'five'
+        }
+      ]
     }
   ]
 })
