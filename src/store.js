@@ -24,9 +24,23 @@ export default new Vuex.Store({
     }, // 设置激活路由
     setIsCollapse(state) {
       state.isCollapse = !state.isCollapse
-    } // 设置菜单收缩
+    }, // 设置菜单收缩
+    m_colseAll(state) {
+      state.routeList = [state.routeList.shift()]
+    },
+    m_colseOther(state, currentTag) {
+      state.routeList = state.routeList.filter(e => e.name == 'doashBoard' || e.name == currentTag.name)
+    }
   },
   actions: {
+    a_colseAll(ctx) {
+      ctx.commit('m_colseAll')
+      let route = {
+        name: 'doashBoard'
+      }
+      ctx.commit('m_setActiveRoute', route)
+      return route
+    },
     a_addRoute(ctx, route) {
       ctx.commit('m_addRoute', route)
       ctx.commit('m_setActiveRoute', route)

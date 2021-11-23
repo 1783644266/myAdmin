@@ -6,15 +6,6 @@
 
 <script>
 export default {
-  created() {
-    console.log('created');
-  },
-  mounted() {
-    console.log('mounted');
-  },
-  beforeDestory() {
-    console.log('destoryed');
-  }
 }
 </script>
 

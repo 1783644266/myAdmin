@@ -26,11 +26,13 @@ export default {
   },
   mounted() {
     const activeRoute = JSON.parse(sessionStorage.getItem('activeRoute'))
-    if (activeRoute) {
-      if (this.$route.name != activeRoute.name) {
-        this.$router.replace({ name: activeRoute.name})
-      }
-      this.$store.dispatch('a_addRoute', activeRoute)
+    if (this.$route.name != 'doashBoard') {
+      this.$router.push({ name: 'doashBoard'})
+    }
+    this.$store.dispatch('a_addRoute', { name: 'doashBoard'})
+    if (activeRoute && activeRoute.name != 'doashBoard') {
+      this.$router.push({ name: activeRoute.name})
+      return this.$store.dispatch('a_addRoute', activeRoute)
     }
   },
   computed: {

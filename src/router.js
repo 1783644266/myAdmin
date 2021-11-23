@@ -9,8 +9,12 @@ import three from './views/three'
 import four from './views/four'
 import five from './views/five'
 import oneone from './views/oneone'
+import doashBoard from './views/doashBoard'
 
 Vue.use(Router)
+
+
+// 默认用name当tags标题，如果需要设置meta的title属性
 
 export default new Router({
   mode: 'history',
@@ -18,11 +22,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'doashBoard',
+      name: 'Layout',
       component: Layout,
       children: [
         {
-          path: 'one',
+          path: '/one',
           component: one,
           name: 'one',
           children: [
@@ -37,6 +41,11 @@ export default new Router({
           path: 'two',
           component: two,
           name: 'two'
+        },
+        {
+          path: 'doashBoard',
+          component: doashBoard,
+          name: 'doashBoard'
         },
         {
           path: 'three',
