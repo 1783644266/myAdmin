@@ -31,11 +31,12 @@ export default new Vuex.Store({
       ctx.commit('m_addRoute', route)
       ctx.commit('m_setActiveRoute', route)
     },
-    a_deleteRoute(ctx, index) {
-      ctx.commit('m_deleteRoute', index)
+    a_deleteRoute(ctx, payload) {
+      ctx.commit('m_deleteRoute', payload.oldIndex)
+      if (payload.name != ctx.state.activeRoute.name) return false
       let activeRoute = null
-      if (index <= ctx.state.routeList.length - 1) {
-        activeRoute = ctx.state.routeList[index]
+      if (payload.oldIndex <= ctx.state.routeList.length - 1) {
+        activeRoute = ctx.state.routeList[payload.oldIndex]
       } else {
         activeRoute = ctx.state.routeList.length ? ctx.state.routeList[ctx.state.routeList.length - 1] : {name: 'doashBoard'}
         // 返回最后一个

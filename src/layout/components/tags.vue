@@ -32,8 +32,8 @@ export default {
       const { routeList } = this
       const { name } = route
       const oldIndex = routeList.findIndex(e => e.name == name)
-      this.$store.dispatch('a_deleteRoute', oldIndex).then( res => {
-        if (res.name == this.$route.name) return
+      this.$store.dispatch('a_deleteRoute', {oldIndex, name}).then( res => {
+        if (!res || res.name == this.$route.name) return
         this.$router.replace({ name: res.name })
       })
     }
