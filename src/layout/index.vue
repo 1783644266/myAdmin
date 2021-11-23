@@ -1,55 +1,83 @@
 <template>
-  <el-container class="wrapper">
-    <el-header>Header</el-header>
-    <el-container style="overflow: hidden;">
-      <el-aside width="250px">
-        <siderBar/>
-      </el-aside>
-      <el-main>
+  <div class="wrapper" :class="{folded: isCollapse}">
+    <header>
+      Header
+    </header>
+    <!-- 头部 -->
+    <!-- 底部 -->
+    <div class="content" style="overflow: hidden;">
+      <siderBar class="leftContent"/>
+      <main>
         <tags/>
         <router-view></router-view>
-      </el-main>
-    </el-container>
-  </el-container>
+      </main>
+    </div>
+  </div>
 </template>
 
 <script >
 import siderBar from './components/siderBar'
 import tags from './components/tags'
+import { mapState } from 'vuex'
 export default {
   components: {
     siderBar,
     tags
   },
+  mounted() {
+    const activeRoute = JSON.parse(sessionStorage.getItem('activeRoute'))
+    if (activeRoute) {
+      if (this.$route.name != activeRoute.name) {
+        this.$router.replace({ name: activeRoute.name})
+      }
+      this.$store.dispatch('a_addRoute', activeRoute)
+    }
+  },
+  computed: {
+    ...mapState(['isCollapse'])
+  },
   data() {
     return {
-
     }
   },
 }
 </script>
 
 <style lang='scss' scoped>
-.wrapper ::v-deep {
-  .el-header{
-    background-color: #B3C0D1;
-    color: #333;
-    height: 90px !important;
-    line-height: 90px !important;
-  }
-    
-  .el-aside {
-    background-color: #D3DCE6;
-    color: #333;
-  }
-  
-  .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    padding: 0 !important;
-  }
+.wrapper {
+  width: 100%;
+  height: 100%;
 }
-.el-container.is-vertical {
-    height: 100%;
+header{
+  background-color: #B3C0D1;
+  color: #333;
+  height: 90px !important;
+  line-height: 90px !important;
+}
+  
+.content {
+  width: 100%;
+  height: calc(100% - 90px);
+}
+.leftContent {
+  width: 250px;
+  float: left;
+}
+main {
+  width: calc(100% - 250px);
+  float: left;
+  height: 100%;
+  background-color: #E9EEF3;
+  color: #333;
+  padding: 0 !important;
+}
+
+.folded {
+  .leftContent {
+    width: 65px;
+  }
+  main {
+    width: calc(100% - 65px);
+  }
 }
 </style>

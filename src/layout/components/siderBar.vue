@@ -5,12 +5,16 @@
         menu-trigger="click"
         :collapse-transition="false"
         mode="vertical"
+        :collapse="isCollapse"
         :default-active="activeRoute.index"
         background-color="#D3DCE6"
       >
         <menuItem v-for="item in menuList" :key="item.index" :menuList="item" />
       </el-menu>
     </el-scrollbar>
+    <el-button class="toggleCollapse" type="primary" @click="$store.commit('setIsCollapse')">
+      {{ isCollapse? '展开' : '折叠'}}
+    </el-button>
   </div>
 </template>
 
@@ -22,7 +26,7 @@ export default {
     menuItem
   },
   computed: {
-    ...mapState(['activeRoute'])
+    ...mapState(['activeRoute', 'isCollapse'])
   },
   data() {
     return {
@@ -62,15 +66,32 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.wrapper {
+.wrapper::v-deep {
   height: 100%;
+  background-color: #DBE6F2;
+  .el-scrollbar {
+    height: 92%;
+    &__wrap {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      // overflow: hidden;
+      .el-menu-item.is-active {
+        background-color: #B0AEB0 !important;
+      }
+    }
+  }
+  .toggleCollapse {
+    height: 8%;
+    width: 100%;
+    padding: 0 !important;
+    text-align: center;
+  }
+  .el-menu--collapse {
+    .el-submenu__icon-arrow {
+      display: none;
+    }
+  }
 }
-.el-scrollbar {
-  height: 100%;
-}
-::v-deep .el-scrollbar__wrap {
-    overflow: scroll;
-    width: 110%;
-    height: 110%;
-}
+
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="tags">
     <el-scrollbar>
       <el-tag
         v-for="route in routeList" :key="route.name"
@@ -42,12 +42,13 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.wrapper::v-deep {
+.tags::v-deep {
   background-color: white;
   white-space: nowrap;
   height: 56px;
   .el-tag {
     margin: 9px 10px 15px;
+    cursor: pointer;
   }
   .el-scrollbar__wrap {
     overflow: scroll;

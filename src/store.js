@@ -5,12 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   routeList: [],
-  activeRoute: {}
-}
-const activeRoute = JSON.parse(sessionStorage.getItem('activeRoute'))
-if (activeRoute) {
-  state.routeList.push(activeRoute)
-  state.activeRoute = activeRoute
+  activeRoute: {},
+  isCollapse: false, // 菜单收缩
 }
 export default new Vuex.Store({
   state,
@@ -25,7 +21,10 @@ export default new Vuex.Store({
     m_setActiveRoute(state, route) {
       state.activeRoute = route
       sessionStorage.setItem('activeRoute', JSON.stringify(route))
-    } // 设置激活路由
+    }, // 设置激活路由
+    setIsCollapse(state) {
+      state.isCollapse = !state.isCollapse
+    } // 设置菜单收缩
   },
   actions: {
     a_addRoute(ctx, route) {
