@@ -16,53 +16,114 @@ Vue.use(Router)
 
 // 默认用name当tags标题，如果需要设置meta的title属性
 
+export const staticRoutes =  [
+  {
+    path: '/',
+    name: 'Layout',
+    redirect: '/doashBoard',
+    component: Layout,
+    children: [
+      {
+        path: 'doashBoard',
+        component: doashBoard,
+        name: 'doashBoard',
+        meta: {
+          title: '首页'
+        }
+      }
+    ]
+  },
+  {
+    path: '/one',
+    name: 'Layout',
+    meta: {
+      title: '第一个子菜单'
+    },
+    component: Layout,
+    children: [
+      {
+        path: 'one',
+        component: one,
+        name: 'one',
+        meta: {
+          title: '第一个选项'
+        }
+      },
+      {
+        path: 'two',
+        component: oneone,
+        name: 'oneone',
+        meta: {
+          title: '第二个选项'
+        }
+      },
+    ]
+  },
+  {
+    path: '/two',
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: two,
+        name: 'two',
+        meta: {
+          title: '第二个'
+        }
+      }
+    ]
+  },
+  {
+    path: '/three',
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: three,
+        name: 'three',
+        meta: {
+          title: '第三个'
+        }
+      }
+    ]
+  },
+  {
+    path: '/four',
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: four,
+        name: 'four',
+        meta: {
+          title: '第四个'
+        }
+      }
+    ]
+  },
+  {
+    path: '/five',
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: five,
+        name: 'five',
+        meta: {
+          title: '第五个'
+        }
+      }
+    ]
+  }
+]
 export default new Router({
   mode: 'history',
   // base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'Layout',
-      component: Layout,
-      children: [
-        {
-          path: '/one',
-          component: one,
-          name: 'one',
-          children: [
-            {
-              path: 'oneone',
-              component: oneone,
-              name: 'oneone'
-            }
-          ]
-        },
-        {
-          path: 'two',
-          component: two,
-          name: 'two'
-        },
-        {
-          path: 'doashBoard',
-          component: doashBoard,
-          name: 'doashBoard'
-        },
-        {
-          path: 'three',
-          component: three,
-          name: 'three'
-        },
-        {
-          path: 'four',
-          component: four,
-          name: 'four'
-        },
-        {
-          path: 'five',
-          component: five,
-          name: 'five'
-        }
-      ]
-    }
-  ]
+  routes: staticRoutes
 })
+
+        

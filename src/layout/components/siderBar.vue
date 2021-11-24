@@ -6,10 +6,11 @@
         :collapse-transition="false"
         mode="vertical"
         :collapse="isCollapse"
-        :default-active="activeRoute.index"
+        :default-active="activeRoute.name"
         background-color="#D3DCE6"
+        v-if="userRoutes.length"
       >
-        <menuItem v-for="item in menuList" :key="item.index" :menuList="item" />
+        <menuItem v-for="item in userRoutes" :key="item.index" :menuList="item" />
       </el-menu>
     </el-scrollbar>
     <el-button class="toggleCollapse" type="primary" @click="$store.commit('setIsCollapse')">
@@ -26,7 +27,7 @@ export default {
     menuItem
   },
   computed: {
-    ...mapState(['activeRoute', 'isCollapse'])
+    ...mapState(['activeRoute', 'isCollapse', 'userRoutes'])
   },
   data() {
     return {

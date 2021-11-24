@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { staticRoutes } from './router'
 Vue.use(Vuex)
 
 const state = {
   routeList: [],
+  userRoutes: staticRoutes, // 用户权限路由
   activeRoute: {},
   isCollapse: false, // 菜单收缩
 }
