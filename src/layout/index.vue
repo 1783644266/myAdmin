@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" :class="{folded: isCollapse}">
     <header>
-      Header
+      <el-button style="float: right;margin-top:15px;" type="primary" @click="logOut">登出</el-button>
     </header>
     <!-- 头部 -->
     <!-- 底部 -->
@@ -42,6 +42,12 @@ export default {
     return {
     }
   },
+  methods: {
+    logOut() {
+      this.$store.commit('m_logOut')
+      this.$router.replace({ path: '/login' })
+    }
+  }
 }
 </script>
 
@@ -76,10 +82,10 @@ main {
 
 .folded {
   .leftContent {
-    width: 65px;
+    width: 120px;
   }
   main {
-    width: calc(100% - 65px);
+    width: calc(100% - 120px);
   }
 }
 </style>

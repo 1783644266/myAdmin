@@ -31,34 +31,6 @@ export default {
   },
   data() {
     return {
-      menuList: [
-        {
-          index: '1',
-          name: 'one',
-          children: [
-            {
-              index: '1-1',
-              name: 'oneone',
-            }
-          ]
-        },
-        {
-          index: '2',
-          name: 'two',
-        },
-        {
-          index: '3',
-          name: 'three',
-        },
-        {
-          index: '4',
-          name: 'four',
-        },
-        {
-          index: '5',
-          name: 'five',
-        }
-      ]
     }
   },
   methods: {
@@ -73,6 +45,9 @@ export default {
   .el-scrollbar {
     height: 92%;
     &__wrap {
+      .el-menu--collapse {
+        width: 100%;
+      }
       overflow-y: scroll;
       overflow-x: hidden;
       // overflow: hidden;

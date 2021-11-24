@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Layout from '@/layout'
 
+import login from './views/login'
 import one from './views/one'
 import two from './views/two'
 import three from './views/three'
@@ -10,6 +11,9 @@ import four from './views/four'
 import five from './views/five'
 import oneone from './views/oneone'
 import doashBoard from './views/doashBoard'
+import admin from './views/admin'
+import editor from './views/editor'
+
 
 Vue.use(Router)
 
@@ -18,13 +22,18 @@ Vue.use(Router)
 
 export const staticRoutes =  [
   {
+    path: '/login',
+    name: 'login',
+    hidden: true,
+    component: login
+  },
+  {
     path: '/',
-    name: 'Layout',
     redirect: '/doashBoard',
     component: Layout,
     children: [
       {
-        path: 'doashBoard',
+        path: '/doashBoard',
         component: doashBoard,
         name: 'doashBoard',
         meta: {
@@ -35,7 +44,7 @@ export const staticRoutes =  [
   },
   {
     path: '/one',
-    name: 'Layout',
+    name: 'one',
     meta: {
       title: '第一个子菜单'
     },
@@ -44,7 +53,7 @@ export const staticRoutes =  [
       {
         path: 'one',
         component: one,
-        name: 'one',
+        name: 'oneone',
         meta: {
           title: '第一个选项'
         }
@@ -52,7 +61,7 @@ export const staticRoutes =  [
       {
         path: 'two',
         component: oneone,
-        name: 'oneone',
+        name: 'onetwo',
         meta: {
           title: '第二个选项'
         }
@@ -61,7 +70,6 @@ export const staticRoutes =  [
   },
   {
     path: '/two',
-    name: 'Layout',
     component: Layout,
     children: [
       {
@@ -76,7 +84,6 @@ export const staticRoutes =  [
   },
   {
     path: '/three',
-    name: 'Layout',
     component: Layout,
     children: [
       {
@@ -91,7 +98,6 @@ export const staticRoutes =  [
   },
   {
     path: '/four',
-    name: 'Layout',
     component: Layout,
     children: [
       {
@@ -106,7 +112,6 @@ export const staticRoutes =  [
   },
   {
     path: '/five',
-    name: 'Layout',
     component: Layout,
     children: [
       {
@@ -120,10 +125,51 @@ export const staticRoutes =  [
     ]
   }
 ]
-export default new Router({
+export const asyncRoutes = [
+  {
+    path: '/admin',
+    component: Layout,
+    role: 'admin',
+    children: [
+      {
+        path: '',
+        component: admin,
+        name: 'admin',
+        meta: {
+          title: 'admin专用页面'
+        }
+      }
+    ]
+  },
+  {
+    path: '/editor',
+    component: Layout,
+    role: 'editor',
+    children: [
+      {
+        path: '',
+        component: editor,
+        name: 'editor',
+        meta: {
+          title: 'editor专用页面'
+        }
+      }
+    ]
+  },
+]
+
+const createRouter = () => new Router({
   mode: 'history',
   // base: process.env.BASE_URL,
   routes: staticRoutes
 })
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher
+}
+
+const router = createRouter()
+
+export default router
 
         

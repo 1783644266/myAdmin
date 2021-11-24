@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { staticRoutes } from './router'
+import router, { staticRoutes, asyncRoutes, resetRouter } from './router'
 Vue.use(Vuex)
 
 const state = {
-  routeList: [],
+  routeList: [], // 已访问的路由
   userRoutes: staticRoutes, // 用户权限路由
+  roleRoute: [], // 用户权限路由
   activeRoute: {},
   isCollapse: false, // 菜单收缩
+  role: JSON.parse(sessionStorage.getItem('role')) || ''
 }
 export default new Vuex.Store({
   state,
@@ -31,6 +33,23 @@ export default new Vuex.Store({
     },
     m_colseOther(state, currentTag) {
       state.routeList = state.routeList.filter(e => e.name == 'doashBoard' || e.name == currentTag.name)
+    },
+    m_setRole(state, role) {
+      state.role = role
+    }, // 添加用户角色
+    m_setRoleRoutes(state) {
+      state.roleRoute = asyncRoutes.filter(e => e.role == state.role)
+      state.userRoutes = [...staticRoutes, ...state.roleRoute]
+      router.addRoutes(state.roleRoute)
+    },
+    m_logOut(state) {
+      sessionStorage.removeItem('role')
+      sessionStorage.removeItem('activeRoute')
+      state.role = ''
+      state.roleRoute = []
+      state.routeList = []
+      state.userRoutes = staticRoutes
+      resetRouter()
     }
   },
   actions: {

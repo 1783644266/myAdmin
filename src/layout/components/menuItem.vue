@@ -1,16 +1,16 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" v-if="!menuList.hidden">
     <el-menu-item
       v-if="!menuList.children || (menuList.children.length == 1)" 
       :index="resolveIndex(menuList)"
       @click.native="pushRouter(menuList)"
     >
-      <span >{{menuList.children? menuList.children[0].meta.title : menuList.meta.title}}</span>
+      <span>{{menuList.children? menuList.children[0].meta.title : menuList.meta.title}}</span>
     </el-menu-item>
 
     <el-submenu v-else :index="resolveIndex(menuList)">
       <template slot="title">
-        <span >{{menuList.meta.title}}</span>
+        <span>{{menuList.meta.title}}</span>
       </template>
       <menuItem v-for="item in menuList.children" :key="item.index" :menuList="item" />
     </el-submenu>
@@ -26,7 +26,6 @@ export default {
   },
   methods: {
     pushRouter(menuList) {
-      console.log(menuList);
       const route = menuList.children ? menuList.children[0] : menuList
       this.$store.commit('m_setActiveRoute', route)
       const { name } = route
