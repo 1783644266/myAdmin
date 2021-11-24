@@ -12,9 +12,6 @@ router.beforeEach((to, from , next) => {
     if (to.path == '/login') {
       next()
     } else {
-      if (from.path != '/login') {
-        Message.error('请登录！')
-      }
       next({ name: 'login'})
     }
   } else {
