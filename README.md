@@ -1,24 +1,11 @@
-# myadmin
+为进一步提升自己的开发能力,从零开始搭建系统框架.
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+目前初步完成模块如下：<br/>
+    页面局部<br/>
+    嵌套菜单<br/>
+    路由vue-router<br/>
+    数据状态共享vuex<br/>
+    全局路由守卫<br/>
+    动态添加角色路由<br/>
+    tags导航栏（路由跳转 与 右键快捷菜单）<br/>
+    未完待续！<br/>
