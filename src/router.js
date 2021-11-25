@@ -13,7 +13,7 @@ import oneone from './views/oneone'
 import doashBoard from './views/doashBoard'
 import admin from './views/admin'
 import editor from './views/editor'
-
+import none from './views/404'
 
 Vue.use(Router)
 
@@ -123,6 +123,10 @@ export const staticRoutes =  [
         }
       }
     ]
+  }, 
+  {
+    path: '*',
+    component: none,
   }
 ]
 export const asyncRoutes = [

@@ -63,7 +63,10 @@ export default {
     text-align: center;
   }
   .el-menu--collapse {
-    .el-submenu__icon-arrow {
+    // .el-submenu__icon-arrow {
+    //   display: none;
+    // }
+    span {
       display: none;
     }
   }

@@ -25,15 +25,6 @@ export default {
     tags
   },
   mounted() {
-    const activeRoute = JSON.parse(sessionStorage.getItem('activeRoute'))
-    if (this.$route.name != 'doashBoard') {
-      this.$router.push({ name: 'doashBoard'})
-    }
-    this.$store.dispatch('a_addRoute', { name: 'doashBoard'})
-    if (activeRoute && activeRoute.name != 'doashBoard') {
-      this.$router.push({ name: activeRoute.name})
-      return this.$store.dispatch('a_addRoute', activeRoute)
-    }
   },
   computed: {
     ...mapState(['isCollapse'])
@@ -82,10 +73,10 @@ main {
 
 .folded {
   .leftContent {
-    width: 120px;
+    width: 56px;
   }
   main {
-    width: calc(100% - 120px);
+    width: calc(100% - 56px);
   }
 }
 </style>

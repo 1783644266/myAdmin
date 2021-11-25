@@ -9,9 +9,11 @@ Nprogress.configure({ showSpinner: false })
 router.beforeEach((to, from , next) => {
   Nprogress.start()
   if (!store.state.role) {
+    // 未登录
     if (to.path == '/login') {
       next()
     } else {
+      // Message.error('请先登录！')
       next({ name: 'login'})
     }
   } else {

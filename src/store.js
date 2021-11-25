@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router, { staticRoutes, asyncRoutes, resetRouter } from './router'
+import none from './views/404'
 Vue.use(Vuex)
 
 const state = {
@@ -23,7 +24,6 @@ export default new Vuex.Store({
     },
     m_setActiveRoute(state, route) {
       state.activeRoute = route
-      sessionStorage.setItem('activeRoute', JSON.stringify(route))
     }, // 设置激活路由
     setIsCollapse(state) {
       state.isCollapse = !state.isCollapse
@@ -44,7 +44,6 @@ export default new Vuex.Store({
     },
     m_logOut(state) {
       sessionStorage.removeItem('role')
-      sessionStorage.removeItem('activeRoute')
       state.role = ''
       state.roleRoute = []
       state.routeList = []
@@ -72,7 +71,7 @@ export default new Vuex.Store({
       if (payload.oldIndex <= ctx.state.routeList.length - 1) {
         activeRoute = ctx.state.routeList[payload.oldIndex]
       } else {
-        activeRoute = ctx.state.routeList.length ? ctx.state.routeList[ctx.state.routeList.length - 1] : {name: 'doashBoard'}
+        activeRoute = ctx.state.routeList.length ? ctx.state.routeList[ctx.state.routeList.length - 1] : {path: '/'}
         // 返回最后一个
       }
       ctx.commit('m_setActiveRoute', activeRoute)

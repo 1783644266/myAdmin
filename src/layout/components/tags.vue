@@ -48,19 +48,37 @@ export default {
         document.removeEventListener('click', this.hiddenMenu)
         this.currentTag = {}
       }
-    } // 当菜单显示监听鼠标点击时间，隐藏时移除监听
+    }, // 当菜单显示监听鼠标点击时间，隐藏时移除监听
+    $route: {
+      handler() {
+        this.addTag()
+      },
+      immediate: true
+    }
   },
   mounted() {
+    if (this.$store.state.routeList[0].name != 'doashBoard') {
+      this.$store.state.routeList.unshift({
+        name: 'doashBoard'
+      })
+    }
     const { top, left } = this.$refs.scrollbar.$el.getBoundingClientRect()
     this.scrollTop = top
     this.scrollLeft = left
   },
   methods: {
+    addTag() {
+      const { $route } = this
+      console.log($route);
+      if ($route.name) {
+        this.$store.dispatch('a_addRoute', $route)
+      }
+    },
     tagClick(route) {
       const { name } = route
       if (name == this.$route.name) return
       this.$store.commit('m_setActiveRoute', route)
-      this.$router.replace({ name })
+      this.$router.push({ name })
     },
     tagClose(route) {
       const { routeList } = this
@@ -68,7 +86,7 @@ export default {
       const oldIndex = routeList.findIndex(e => e.name == name)
       this.$store.dispatch('a_deleteRoute', {oldIndex, name}).then( res => {
         if (!res || res.name == this.$route.name) return
-        this.$router.replace({ name: res.name })
+        this.$router.push(res)
       })
     },
     openMenu(route, e) {
