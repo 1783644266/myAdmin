@@ -9,7 +9,12 @@ import'element-ui/lib/theme-chalk/index.css';
 import '@/assets/normalize.scss'
 import './permission'
 
+import directive from '@/directives'
+
 Vue.use(ElementUI)
+Vue.use(directive)
+
+
 Vue.config.productionTip = false
 
 new Vue({

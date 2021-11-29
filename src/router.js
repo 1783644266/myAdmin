@@ -15,6 +15,8 @@ import admin from './views/admin'
 import editor from './views/editor'
 import none from './views/404'
 
+import directive from './views/directive'
+
 Vue.use(Router)
 
 
@@ -125,8 +127,23 @@ export const staticRoutes =  [
     ]
   }, 
   {
+    path: '/directive',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'directive',
+        component: directive,
+        meta: {
+          title: '指令测试'
+        }
+      }
+    ]
+  },
+  {
     path: '*',
-    component: none,
+    hidden: true,
+    component: none
   }
 ]
 export const asyncRoutes = [
